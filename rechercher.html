@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://www.bootcamp.fr/wp-content/uploads/2024/02/cropped-bootcampfavicon-192x192.png" sizes="192x192" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>Rechercher un Client</title>
+    <style>
+      .card_recherche{
+        background-color: var(--card-background);
+    padding: 20px;
+    border-radius: 8px; /* Adoucit les coins pour un look moderne */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Augmente la profondeur de l'ombre pour un effet plus net */
+    max-width: 800px;
+    margin: 20px auto;
+    border: 2px solid var(--primary-color); /* Utilise une bordure pleine au lieu de groove pour une apparence plus élégante */
+    transition: box-shadow 0.3s ease; /* Ajoute une transition douce pour les interactions */
+      }
+      h4 {
+        background-color: rgb(255, 255, 255);
+       
+       
+      }
+
+    </style>
+</head>
+<body>
+    <header>
+        <img src="images/bootcamp_new.png" alt="Bootcamp Image">
+        <h1><i class="fas fa-user-tie"></i> Rechercher un Client</h1>
+    </header>
+
+    <div class="card">
+        <button onclick="window.location.href='index.php'"><i class="fas fa-home"></i> Accueil</button>
+        <h2>Rechercher un Client</h2>
+        <form id="form-modification">
+            <label for="mod_nom">Nom :</label>
+            <input type="text" id="mod_nom" name="mod_nom" required>
+            <label for="mod_prenom">Prénom :</label>
+            <input type="text" id="mod_prenom" name="mod_prenom" required>
+            <label for="mod_telephone">Téléphone :</label>
+            <input type="text" id="mod_telephone" name="mod_telephone">
+            <button type="button" onclick="rechercherClientMod()"><i class="fas fa-search"></i>Rechercher</button>
+        </form>
+   
+        <div class="card">
+        <div id="client-info" class="client-info" style="display: none;">
+            <h4 class="client-info-title">Informations Générales</h4>
+            <div class="client-info-item">
+                <strong>Nom :</strong> <span id="client-nom"></span>
+            </div>
+            <div class="client-info-item">
+                <strong>Prénom :</strong> <span id="client-prenom"></span>
+            </div>
+            <div class="client-info-item">
+                <strong>Téléphone :</strong> <span id="client-telephone"></span>
+            </div>
+            <div class="client-info-item">
+                <strong>Email :</strong> <a id="client-email" href="#" onclick="sendEmail()"></a>
+            </div>
+
+            <h4 class="client-info-title">Attestations et Formations</h4>
+            <div class="client-info-item">
+                <strong>Attestations :</strong>
+                <ul id="client-attestations-list"></ul>
+            </div>
+            <div class="client-info-item">
+                <strong>Formations :</strong>
+                <table id="client-formations-table" class="formations-table">
+                    <thead>
+                        <tr>
+                            <th>Formation</th>
+                            <th>Date de début</th>
+                            <th>Date de Fin</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h4 class="client-info-title">Informations de Paiement</h4>
+            <div class="client-info-item">
+                <strong>Mode de Paiement :</strong> <span id="client-mode-paiement"></span>
+            </div>
+            <div class="client-info-item">
+                <strong>Montant Payé :</strong> <span id="client-montant"></span> 
+            </div>
+            <div class="client-info-item">
+                <strong>Montant Restant :</strong> <span id="client-montant_restant"></span> 
+            </div>
+            <h4 class="client-info-title">Commentaire</h4>
+            <div class="client-info-item">
+                <strong>Commentaire :</strong> <span id="client-commentaire"></span>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+    <script>
+        function rechercherClientMod() {
+            const modNom = document.getElementById('mod_nom').value.trim();
+            const modPrenom = document.getElementById('mod_prenom').value.trim();
+            const modTelephone = document.getElementById('mod_telephone').value.trim();
+    
+            if (!modNom || !modPrenom) {
+                alert('Nom et prénom sont requis !');
+                return;
+            }
+    
+            const formData = new FormData();
+            formData.append('mod_nom', modNom);
+            formData.append('mod_prenom', modPrenom);
+            formData.append('mod_telephone', modTelephone);
+    
+            fetch('rechercher_client.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                    document.getElementById('client-info').style.display = 'none';
+                } else {
+                    afficherDetailsClient(data);
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+            });
+    
+           }
+           function afficherDetailsClient(client) {
+    document.getElementById('client-nom').textContent = client.nom || 'N/A';
+    document.getElementById('client-prenom').textContent = client.prenom || 'N/A';
+    document.getElementById('client-telephone').textContent = client.telephone || 'N/A';
+    document.getElementById('client-email').textContent = client.email || 'N/A';
+    
+    // Affichage des attestations
+    const attestationList = document.getElementById('client-attestations-list');
+    attestationList.innerHTML = ''; // Vider la liste existante
+
+    if (client.attestations && client.attestations.length > 0) {
+        client.attestations.forEach(attestation => {
+            const listItem = document.createElement('li');
+            const link = document.createElement('a');
+            
+            link.href = `uploads/${attestation.fichier}`; // Chemin vers le fichier d'attestation
+            link.textContent = attestation.fichier; // Utiliser le nom du fichier comme texte du lien
+            link.download = attestation.fichier; // Ajouter l'attribut download pour forcer le téléchargement
+            
+            listItem.appendChild(link);
+            attestationList.appendChild(listItem);
+        });
+    } else {
+        const listItem = document.createElement('li');
+        listItem.textContent = 'Aucune attestation disponible';
+        attestationList.appendChild(listItem);
+    }
+
+    document.getElementById('client-mode-paiement').textContent = client.mode_paiement || 'N/A';
+    document.getElementById('client-montant').textContent = `${client.montant} €`;
+    document.getElementById('client-montant_restant').textContent = `${client.montant_restant} €`;
+    document.getElementById('client-commentaire').textContent = client.commentaire || 'N/A';
+
+    // Vider la table des formations
+    const tableBody = document.querySelector('#client-formations-table tbody');
+    tableBody.innerHTML = '';
+
+    // Ajouter les formations
+    if (client.formations && client.formations.length > 0) {
+        client.formations.forEach(formation => {
+            const row = document.createElement('tr');
+            const cellFormation = document.createElement('td');
+            const cellSession = document.createElement('td');
+            const cellDateFin = document.createElement('td'); // Nouvelle cellule pour la date de fin
+
+            cellFormation.textContent = formation.formation || 'N/A';
+            cellSession.textContent = formation.session_date || 'N/A';
+            cellDateFin.textContent = formation.date_fin || 'N/A'; // Affichage de la date de fin
+
+            row.appendChild(cellFormation);
+            row.appendChild(cellSession);
+            row.appendChild(cellDateFin); // Ajout de la cellule pour la date de fin
+            tableBody.appendChild(row);
+        });
+    } else {
+        const row = document.createElement('tr');
+        const cell = document.createElement('td');
+        cell.colSpan = 3; // Ajuster la largeur de la cellule pour la date de fin
+        cell.textContent = 'Aucune formation trouvée';
+        row.appendChild(cell);
+        tableBody.appendChild(row);
+    }
+
+    document.getElementById('client-info').style.display = 'block';
+}
+
+function sendEmail() {
+    const email = document.getElementById('client-email').textContent;
+    if (email && email !== 'N/A') {
+        window.location.href = `mailto:${email}`;
+    } else {
+        alert('Email non disponible');
+    }
+}
+
+
+        function retourAccueil() {
+            window.location.href = 'index.php';
+        }
+    </script>
+    
+    
+</body>
+</html>

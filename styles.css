@@ -1,0 +1,599 @@
+/* styles.css */
+
+:root {
+    --primary-color: #004d40; /* Vert foncé */
+    --secondary-color: #00796b; /* Vert moyen */
+    --accent-color: #ff5722; /* Orange vif */
+    --background-color: #f5f5f5; /* Gris clair */
+    --card-background: #ffffff; /* Blanc */
+    --text-color: #212121; /* Gris foncé */
+    --link-color: #00796b; /* Vert moyen */
+    --hover-link-color: #004d40; /* Vert foncé */
+    --border-color: #e0e0e0; /* Bordure grise clair */
+    --delete-button-color: #e53935; /* Rouge vif */
+    --delete-button-hover-color: #c62828; /* Rouge foncé */
+}
+
+
+.parallax {
+    background-image: url(file:///C:/xampp/htdocs/mon_appp/images/Default_an_image_that_combines_all_the_formations_within_Bootc_0.jpg);
+    height: 300px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.content {
+    height: 1000px; 
+    background-color: var(--background-color);
+    text-align: center; 
+    padding: 50px;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.btn-supprimer {
+    background-color: var(--delete-button-color);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: #601a05 groove;
+}
+
+.btn-supprimer:hover {
+    background-color: var(--delete-button-hover-color);
+}
+
+td {
+    border: 1px solid var(--border-color);
+    padding: 3px;
+    text-align: center;
+}
+
+th {
+    background-color: var(--background-color);
+    text-align: center;
+    padding: 8px;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+header {
+    background-color: var(--primary-color);
+    color: var(--card-background);
+    padding: 26px;
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: #004d40 groove;
+
+   
+
+}
+
+header img {
+    max-width: 200px;
+    height: auto;
+    margin-right: 20px;
+    background-color: var(--card-background);
+    border: #004d40 groove;
+}
+
+header h1 {
+    margin: 0;
+    font-weight: 600;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 20px;
+    
+}
+
+
+
+
+.container {
+    max-width: 1300px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: var(--card-background);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: #004d40 groove;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    background-color: var(--secondary-color);
+    color: var(--card-background);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    margin: 15px;
+    box-shadow: 0 4px 8px rgba(57, 216, 187, 0.2);
+    border: 2px solid #004d40; /* Couleur de la bordure */
+}
+
+button:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-3px); /* Légère élévation du bouton */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+    background-color: var(--primary-color);
+    transform: translateY(1px); /* Réaction au clic, légère descente */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-ajouter-formation {
+    padding: 10px 20px;
+    background-color: var(--accent-color);
+    color: var(--card-background);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-ajouter-formation:hover {
+    background-color: #601a05;
+}
+
+/* Style global pour les labels */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 16px; /* Augmente légèrement la taille de la police pour une meilleure lisibilité */
+    color: var(--text-color); /* Assure que la couleur du texte est cohérente avec le reste du design */
+}
+
+/* Style pour les champs de saisie */
+input, select, textarea {
+    width: calc(100% - 24px); /* Ajuste la largeur pour une meilleure compatibilité avec le padding */
+    padding: 14px; /* Augmente le padding pour plus de confort */
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px; /* Adoucit les coins pour un look plus moderne */
+    font-size: 15px; /* Augmente légèrement la taille de la police pour une meilleure lisibilité */
+    background-color: var(--background-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Ajoute une transition douce pour les interactions */
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--accent-color); /* Change la couleur de la bordure au focus pour attirer l'attention */
+    box-shadow: 0 0 5px rgba(2, 130, 122, 0.2); /* Ajoute une ombre douce pour un effet de focus */
+}
+
+/* Style pour les entrées de formation */
+.formation-entry {
+    margin-bottom: 20px;
+}
+
+/* Style pour les titres */
+h2 {
+    font-size: 24px; /* Taille de police légèrement réduite pour une hiérarchie visuelle raffinée */
+    margin-bottom: 20px; /* Espacement sous le titre */
+    text-align: center; /* Centrer le texte */
+    color: var(--text-color); /* Couleur du texte */
+    padding: 15px 25px; /* Espacement interne avec une largeur plus grande pour plus de confort */
+    border-radius: 8px; /* Coins arrondis pour un aspect moderne */
+    background: #ffffff; /* Fond blanc pour une apparence propre */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Ombre subtile pour une profondeur élégante */
+    font-weight: 500; /* Poids de la police pour une apparence plus professionnelle */
+    border-bottom: 2px solid var(--primary-color); /* Bordure inférieure pour accentuer le titre */
+    transition: all 0.3s ease-in-out; /* Transition douce pour les effets de survol */
+}
+
+h2:hover {
+    color: var(--primary-color); /* Changer la couleur du texte au survol */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25); /* Ombre plus prononcée au survol */
+    transform: translateY(-2px); /* Légère élévation au survol */
+    border-bottom: 2px solid var(--accent-color); /* Modifier la couleur de la bordure inférieure au survol */
+}
+
+
+
+
+
+
+/* Style pour les messages */
+.message {
+    display: none;
+    padding: 15px;
+    margin-top: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px; /* Adoucit les coins pour une meilleure apparence */
+    background-color: #e9ecef;
+    color: var(--text-color);
+    font-size: 19px; /* Ajuste la taille de la police pour la cohérence */
+}
+
+/* Style pour les cartes */
+.card {
+    background-color: var(--card-background);
+    padding: 20px;
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    max-width: 970px;
+    margin: 20px auto;
+    border: 2px solid rgb(85, 255, 0); 
+    transition: box-shadow 0.3s ease; 
+    
+}
+
+.card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Augmente l'ombre au survol pour un effet interactif */
+}
+
+#clients-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#clients-table th, #clients-table td {
+    padding: 1px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+#clients-table th {
+    background-color: var(--secondary-color);
+    font-weight: bold;
+    color: var(--card-background);
+    padding: 10px;
+}
+
+#clients-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#clients-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.btn-supprimer-formation {
+    background-color: var(--delete-button-color);
+    color: var(--card-background);
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    margin: 2px;
+}
+
+.btn-supprimer-formation i {
+    margin-right: 5px;
+}
+
+.btn-supprimer-formation:hover {
+    background-color: var(--delete-button-hover-color);
+}
+
+
+
+.montant-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.montant-container label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.montant-container .input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.montant-container .input-group input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+.montant-container .input-group i {
+    padding: 10px;
+    background-color: var(--secondary-color);
+    color: var(--card-background);
+    font-size: 16px;
+}
+
+.montant-container .input-group input:focus {
+    border-color: var(--secondary-color);
+}
+
+@keyframes imagePoussee {
+    0% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes titrePoussee {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+header img {
+    animation: imagePoussee 0.8s ease-out;
+}
+
+header h1 {
+    animation: titrePoussee 0.8s ease-out;
+    margin: 0;
+}
+
+.alphabet-filter {
+    margin: 20px 0;
+}
+
+.alphabet-filter button {
+    background-color: var(--primary-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin: 4px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+   
+}
+
+.alphabet-filter button:hover {
+    background-color: var(--secondary-color);
+    
+}
+
+.alphabet-filter button.active {
+    background-color: #0a8d7d;
+    border: #000000 groove;
+}
+
+.alphabet-container {
+    background-color: hsla(0, 0%, 57%, 0.298);
+}
+
+
+    
+        /* Style pour la section des informations du client */
+        .formations-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 11px;
+            border: 1px solid #ddd;
+        }
+        
+        .formations-table th, .formations-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .formations-table th {
+            background-color: #0a8d7d;
+            font-weight: bold;
+            border-bottom: 2px solid #ddd;
+        }
+        
+        .formations-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .formations-table tr:hover {
+            background-color: #ddd;
+        }
+        client-info {
+            background-color: beige; /* Fond blanc pour un look propre */
+            padding: 40px 60px; /* Espacement généreux */
+            border-radius: 12px; /* Coins arrondis pour une apparence moderne */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Ombre subtile pour donner de la profondeur */
+            max-width: 900px; /* Largeur maximale pour une bonne mise en page */
+            margin: 40px auto; /* Centre la section avec un espacement autour */
+            font-family: 'Roboto', sans-serif; /* Typographie moderne et professionnelle */
+            line-height: 1.8; /* Hauteur de ligne pour plus de clarté */
+            border: #0a8d7d groove;
+        }
+        
+        .client-info-title {
+            font-size: 28px; /* Taille du texte pour le titre */
+            color: #000000; /* Couleur bleu professionnel */
+            margin-bottom: 20px; /* Espacement sous le titre */
+            border-bottom: 3px solid#004d40; /* Ligne de séparation colorée */
+            padding-bottom: 12px; /* Espacement sous la ligne */
+            font-weight: 700; /* Poids de la police pour un titre prononcé */
+        }
+        
+        .client-info-item {
+            margin-bottom: 20px; /* Espacement entre les éléments */
+            font-size: 18px; /* Taille du texte pour les éléments */
+            color: #444; /* Couleur de texte sombre pour une bonne lisibilité */
+        }
+        
+        .client-info-item strong {
+            color: #033c35; /* Couleur des labels pour les mettre en évidence */
+            font-weight: 600; /* Poids de la police pour les labels */
+        }
+        
+        .client-info-item span {
+            color: #141313; /* Couleur plus claire pour les valeurs */
+            font-weight: 400; /* Poids de la police pour les valeurs */
+            text-decoration:solid;
+        }
+        
+        .download-link {
+            color:#00796b; /* Couleur verte pour le lien */
+            text-decoration: none; /* Enlève le soulignement */
+            font-weight: 500; /* Poids de la police pour le lien */
+        }
+        
+        .download-link:hover {
+            text-decoration: underline; /* Souligne le lien au survol */
+            color:  #00362d; /* Couleur verte plus foncée au survol */
+        }
+        
+        .client-details {
+            margin-top: 30px; /* Espacement au-dessus du bloc de détails */
+            padding: 20px;
+            border: 1px solid #e1e8ed; /* Bordure subtile pour le bloc de détails */
+            border-radius: 8px; /* Coins arrondis pour le bloc de détails */
+            background-color: #f8f9fa; /* Fond légèrement gris pour le bloc de détails */
+        }
+        
+        /* Utilisation d'icônes pour les labels */
+        .client-info-item strong::before {
+            content: attr(data-icon); /* Utilise les icônes SVG ou font-awesome */
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            vertical-align: middle;
+            font-size: 1.2em; /* Taille de l'icône */
+            color: #004d40; /* Couleur des icônes */
+        }
+        
+                .btn-supprimer-attestation {
+                    background-color: #cc0000; /* Red color */
+                    color: #ffffff; /* White text */
+                    border: none;
+                    padding: 5px 10px;
+                    margin-left: 80px;
+                    cursor: pointer;
+                }
+                .btn-supprimer-attestation:hover {
+                    background-color: #990000; /* Darker red on hover */
+                }
+               
+                .btn-ajouter-attestation {
+                    background-color: #0066cc; /* Light Blue */
+                    color: white;
+                    border: none;
+                    padding: 5px 10px;
+                    cursor: pointer;
+                }
+                
+                .btn-supprimer-attestation {
+                    background-color: #cc0000; /* Red */
+                    color: white;
+                    border: none;
+                    padding: 5px;
+                    cursor: pointer;
+                    margin-left: 10px;
+                }
+                
+                .attestation-entry {
+                    margin-bottom: 5px;
+                }
+
+                 /* Style pour les titres h3 */
+h3 {
+    font-family: 'Montserrat', sans-serif; /* Utiliser la police Montserrat */
+    font-weight: 600; /* Poids de la police pour une apparence audacieuse mais élégante */
+    font-size: 1.5em; /* Taille du texte pour une visibilité optimale */
+    color: var(--primary-color); /* Couleur principale pour les titres */
+    text-align:center; /* Alignement à gauche pour le texte */
+    border-bottom: 3px solid var(--secondary-color); /* Ligne décorative orange vif sous le titre */
+    padding-bottom: 8px; /* Espacement sous le titre pour la ligne décorative */
+    margin-bottom: 15px; /* Espacement sous le titre pour séparer des autres sections */
+    position: relative; /* Positionnement relatif pour des effets supplémentaires */
+    background-color: var(--background-color); /* Fond gris clair pour le titre */
+    padding: 10px; /* Espacement intérieur autour du titre */
+    border-radius: 5px; /* Bords légèrement arrondis pour une apparence plus douce */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère pour un effet de profondeur */
+}
+
+/* Effet de survol pour les titres h3 */
+h3:hover {
+    color: var(--secondary-color); /* Couleur de survol pour le texte */
+    cursor: pointer; /* Curseur de pointeur pour indiquer que le titre est interactif */
+    border-bottom: 3px solid var(--secondary-color); /* Change la couleur de la ligne décorative au survol */
+    transition: color 0.3s ease, border-bottom-color 0.3s ease; /* Transition fluide pour les effets de survol */
+}
+
+/* Style pour les éléments <optgroup> */
+optgroup {
+    color: var(--primary-color);
+    font-weight: bold;
+    padding: 5px;
+    background-color: var(--card-background);
+    border-bottom: 1px solid var(--border-color);
+    background-color: #04b6a1;
+
+}
+/* Style pour les options */
+option {
+    padding: 8px 10px;
+    color: var(--text-color);
+    background-color: var(--card-background);
+    border: none;
+    font-size: 16px;
+}
+      
+.message {
+    background-color: #d4edda; /* Couleur de fond vert pâle */
+    color: #155724; /* Couleur du texte vert foncé */
+    border: 1px solid #c3e6cb; /* Bordure verte */
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    max-width: 600px;
+    margin: 20px auto; /* Centrer le message */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    display: none; /* Par défaut, le message est masqué */
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Ajout d'une animation pour l'apparition du message */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

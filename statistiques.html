@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Statistiques des Formations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <img src="images/bootcamp_new.png" alt="Bootcamp Formation" style="text-align: left;">
+        <h1><i class="fas fa-user-tie"></i> Statistiques des Formations</h1>
+    </header>
+    <div class="card">
+        <button onclick="retourAccueil()"><i class="fas fa-home"></i> Accueil</button>
+        <h2>Statistiques des Formations</h2>
+        <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        fetch('fetch_stats.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error('Error:', data.error);
+                return;
+            }
+
+            const labels = data.map(item => item.formation);
+            const counts = data.map(item => item.count);
+
+            // Generate a distinct color for each segment
+            const generateColor = (count) => {
+                const colors = [];
+                for (let i = 0; i < count; i++) {
+                    const hue = Math.floor((i / count) * 360);
+                    colors.push(`hsl(${hue}, 70%, 70%)`);
+                }
+                return colors;
+            };
+
+            const chartData = {
+                labels: labels,
+                datasets: [{
+                    label: 'Nombre de Clients',
+                    data: counts,
+                    backgroundColor: generateColor(labels.length),
+                    borderColor: generateColor(labels.length).map(color => color.replace('0.7', '1')), // Darker border
+                    borderWidth: 1
+                }]
+            };
+
+            const config = {
+                type: 'pie',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    return tooltipItem.label + ': ' + tooltipItem.raw + ' clients';
+                                }
+                            }
+                        }
+                    }
+                },
+            };
+
+            new Chart(document.getElementById('myChart'), config);
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    });
+
+    function retourAccueil() {
+        window.location.href = 'index.php';
+    }
+    </script>
+</body>
+</html>

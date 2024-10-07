@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head</head>
+    <meta charset="UTF-8">
+    <title>Ajouter un Client</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
+    <style>
+       
+   
+
+
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('form-client');
+            const messageDiv = document.getElementById('message');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Empêcher l'envoi normal du formulaire
+
+                const formData = new FormData(form);
+
+                fetch('ajouter.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        messageDiv.textContent = data.message;
+                        messageDiv.style.color = 'green';
+                    } else {
+                        messageDiv.textContent = data.message;
+                        messageDiv.style.color = 'red';
+                    }
+                    messageDiv.style.display = 'block';
+                })
+                .catch(error => {
+                    messageDiv.textContent = 'Une erreur est survenue.';
+                    messageDiv.style.color = 'red';
+                    messageDiv.style.display = 'block';
+                  
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <img src="images/bootcamp_new.png" alt="Bootcamp Image" style="text-align: left;">
+        <h1><i class="fas fa-user-tie"></i> Ajouter un Client</h1>
+    </header>
+    <div class="card">
+        <button onclick="window.location.href='index.php'"><i class="fas fa-home"></i> Accueil</button>
+        <h2>Ajouter un Client</h2>
+        <form id="form-client" action="ajouter.php" method="POST" enctype="multipart/form-data">
+
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom" placeholder="Entrez le nom" required>
+            
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" name="prenom" placeholder="Entrez le prénom" required>
+            
+            <label for="telephone">Téléphone :</label>
+            <input type="text" id="telephone" name="telephone" placeholder="Entrez le numéro de téléphone">
+            
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" placeholder="Entrez l'adresse email">
+            
+           
+            
+            <div id="formations">
+                <div class="formation-entry" id="formation-entry-1">
+                    <label for="formation">Formation :</label>
+                    <select name="formation">
+                       
+                        <optgroup label="ÉLECTRICITÉ:">
+                        <option value="Formation travaux sous tension en BT sur les installations – Batteries d’accumulateurs stationnaires">Formation travaux sous tension en BT sur les installations – Batteries d’accumulateurs stationnaires</option>
+                        <option value="Formation Signalisation Lumineuse Tricolore (SLT) – Niveau 1">Formation Signalisation Lumineuse Tricolore (SLT) – Niveau 1</option>
+                        <option value="Formation Signalisation Lumineuse Tricolore (SLT) – Niveau 2">Formation Signalisation Lumineuse Tricolore (SLT) – Niveau 2</option>
+                        <option value="Formation Eclairage Publique – Niveau 4">Formation Eclairage Publique – Niveau 4</option>
+                        <option value="Formation Eclairage Publique – Niveau 3">Formation Eclairage Publique – Niveau 3</option>
+                        <option value="Formation Colonne Montante – Module Chargé d’Affaires">Formation Colonne Montante – Module Chargé d’Affaires</option>
+                        <option value="Formation Colonne Montante – Module Technique Installateur">Formation Colonne Montante – Module Technique Installateur</option>
+                        <option value="Formation Eclairage Publique – Niveau 2">Formation Eclairage Publique – Niveau 2</option>
+                        <option value="Formation Eclairage Publique – Niveau 1">Formation Eclairage Publique – Niveau 1</option>
+                        <option value="Formation électricité – Niveau 2 : Installation électrique dans les logements">Formation électricité – Niveau 2 : Installation électrique dans les logements</option>
+                        <option value="Formation électricité – Niveau 1 : Bases de l’électricité">Formation électricité – Niveau 1 : Bases de l’électricité</option>
+                    </optgroup>
+
+                        <optgroup label="MAINTENANCE INDUSTRIELLE:">
+                        <option value="Formation Maintenance Préventive">Formation Maintenance Préventive</option>
+                        <optgroup label="MANAGEMENT:">
+                            <option value="Formation SECRETAIRE COMPTABLE – 18 heures">Formation SECRETAIRE COMPTABLE – 18 heures</option>
+                            <option value="Formation Encadrement d’Equipe">Formation Encadrement d’Equipe</option>
+                            <option value="Formation Gestion de Chantier">Formation Gestion de Chantier</option>
+                            <option value="Formation Rédaction du DUER (Document Unique d’Évaluation des Risques)">Formation Rédaction du DUER (Document Unique d’Évaluation des Risques)</option>
+
+                            <optgroup label="TELECOM VDI:">
+                                <option value="Formation Installation Alarme et Contrôle d’accès">Formation Installation Alarme et Contrôle d’accès</option>
+                                <option value="Formation Installation Vidéo Protection et Vidéo Surveillance">Formation Installation Vidéo Protection et Vidéo Surveillance</option>
+                                <option value="Formation Solutions Domotiques">Formation Solutions Domotiques</option>
+
+                            <optgroup label="INSERTION PROFESSIONNELLE:">  
+                                <option value="Formation Monteur Raccordeur Mobile GSM 4G/5G (INSERTION)">Formation Monteur Raccordeur Mobile GSM 4G/5G (INSERTION)</option>
+                                <option value="Formation Technicien VDI Multitechnique – Spécialisation domotique, alarme, vidéo-surveillance (INSERTION)">Formation Technicien VDI Multitechnique – Spécialisation domotique, alarme, vidéo-surveillance (INSERTION)</option>
+                                <option value="Formation Technicien VDI Multitechnique – Spécialisation domotique, alarme, vidéo-surveillance (RECONVERSION)">Formation Technicien VDI Multitechnique – Spécialisation domotique, alarme, vidéo-surveillance (RECONVERSION)</option>
+                                <option value="Formation Monteur Raccordeur Fibre FTTH (RECONVERSION)">Formation Monteur Raccordeur Fibre FTTH (RECONVERSION)</option>
+                                <option value="Formation Monteur Raccordeur Fibre FTTH (INSERTION)">Formation Monteur Raccordeur Fibre FTTH (INSERTION)</option>
+                                <option value="Formation Aide Electricien du Bâtiment – Spécialisation Transition Énergétique (RECONVERSION)">Formation Aide Electricien du Bâtiment – Spécialisation Transition Énergétique (RECONVERSION)</option>
+                                <option value="Formation Aide Electricien du Bâtiment – Spécialisation Transition Énergétique (INSERTION)">Formation Aide Electricien du Bâtiment – Spécialisation Transition Énergétique (INSERTION)</option>
+                                <option value="Formation Aide Installateur Monteur IRVE">Formation Aide Installateur Monteur IRVE</option>
+                                <option value="Formation Monteur Raccordeur Mobile GSM 4G/5G (RECONVERSION)">Formation Monteur Raccordeur Mobile GSM 4G/5G (RECONVERSION)</option>
+                                <option value="Formation Monteur Raccordeur Fibre FTTH (POEC)">Formation Monteur Raccordeur Fibre FTTH (POEC)</option>
+                                <option value="Formation Monteur Raccordeur Mobile GSM 4G/5G (POEC)">Formation Monteur Raccordeur Mobile GSM 4G/5G (POEC)</option>
+
+                            <optgroup label="Transition Energétique:"> 
+                                <option value="Parcours TPE Artisan option IRVE – B_TPE_IRVE">Parcours TPE Artisan option IRVE – B_TPE_IRVE</option>
+                                <option value="Formation Panneau Photovoltaïque – QUALI SPV1 SPV2">Formation Panneau Photovoltaïque – QUALI SPV1 SPV2 </option>
+                                <option value="Formation Pompe à chaleur – QUALI’PAC">Formation Pompe à chaleur – QUALI’PAC</option>
+                                <option value="Formation Panneau Photovoltaïque – QUALI’PV BAT">Formation Panneau Photovoltaïque – QUALI’PV BAT</option>
+                                <option value="Formation Chantier PV – Panneaux Photovoltaïques">Formation Chantier PV – Panneaux Photovoltaïques</option>
+                                <option value="Formation Panneau Solaire – QUALI’SOL CESI">Formation Panneau Solaire – QUALI’SOL CESI</option>
+                                <option value="Formation Panneau Solaire – QUALI’SOL SSC">Formation Panneau Solaire – QUALI’SOL SSC</option>
+                                <option value="Formation Panneau Photovoltaïque – QUALI’PV HAUTE PUISSANCE">Formation Panneau Photovoltaïque – QUALI’PV HAUTE PUISSANCE</option>
+                                <option value="Formation Panneau Photovoltaïque – QUALI’PV ELEC">Formation Panneau Photovoltaïque – QUALI’PV ELEC</option>
+                                <option value="Formation Etude IRVE">Formation Etude IRVE</option>
+                                <option value="Formation Maintenance IRVE – MA1">Formation Maintenance IRVE – MA1</option>
+                                <option value="Formation Installation IRVE P1 P2 P3">Formation Installation IRVE P1 P2 P3</option>
+                                <option value="Formation Installation IRVE P1 P2">Formation Installation IRVE P1 P2</option>
+                                <option value="Formation Chantier IRVE">Formation Chantier IRVE</option>
+
+                                <optgroup label="INFORMATIQUE:">
+                                    <option value="Formation BOOTSTRAP – 15 heures">Formation BOOTSTRAP – 15 heures</option>
+                                    <option value="Formation Technicien d’assistance en Informatique – 40 heures">Formation Technicien d’assistance en Informatique – 40 heures</option>
+                                    <option value="Formation Concepteur designer UI – 14 heures">Formation Concepteur designer UI – 14 heures</option>
+                                    <option value="Formation HTML-CSS – 15 heures">Formation HTML-CSS – 15 heures</option>
+                                    <option value="Formation GIT-HUB – 10 heures">Formation GIT-HUB – 10 heures</option>
+                                    <option value="Formation AUTODESK REVIT – 22 heures">Formation AUTODESK REVIT – 22 heures</option>
+                                    <option value="Formation LANGUAGE C++ – 40 heures">Formation LANGUAGE C++ – 40 heures</option>
+                                    <option value="Formation INTERACTIVE JQUERY – 10 heures">Formation INTERACTIVE JQUERY – 10 heures</option>
+                                    <option value="Formation PYTHON – 9 heures">Formation PYTHON – 9 heures</option>
+                                    <option value="Formation CYBER SÉCURITÉ – 35 heures">Formation CYBER SÉCURITÉ – 35 heures</option>
+                                    <option value="Formation SASS – 7 heures">Formation SASS – 7 heures</option>
+                                    <option value="Formation HTML-CSS – 14 heures">Formation HTML-CSS – 14 heures</option>
+                                    <option value="Formation JAVA SCRIPT – 14 heures">Formation JAVA SCRIPT – 14 heures</option>
+                                    <option value="Formation JAVA SCRIPT – 7 heures">Formation JAVA SCRIPT – 7 heures</option>
+                                    <option value="Formation GIT-HUB – 4 heures">Formation GIT-HUB – 4 heures</option>
+                                    <option value="Formation GIT-HUB – 1 heure">Formation GIT-HUB – 1 heure</option>
+                                    <option value="Formation TECHNICIEN RESEAUX IP – 21 heures">Formation TECHNICIEN RESEAUX IP – 21 heures</option>
+                                    <option value="Formation TECHNICIEN RESEAUX IP – 14 heures">Formation TECHNICIEN RESEAUX IP – 14 heures</option>
+                                    <option value="Formation TECHNICIEN RESEAUX IP – 7 heures">Formation TECHNICIEN RESEAUX IP – 7 heures</option>
+                                    <option value="Formation TECHNICIEN ETUDE EN MECANIQUE – 21 heures">Formation TECHNICIEN ETUDE EN MECANIQUE – 21 heures</option>
+                                    <option value="Formation TECHNICIEN ETUDE EN MECANIQUE – 14 heures">Formation TECHNICIEN ETUDE EN MECANIQUE – 14 heures</option>
+                                    <option value="Formation TECHNICIEN ETUDE EN MECANIQUE – 7 heures">Formation TECHNICIEN ETUDE EN MECANIQUE – 7 heures</option>
+                                    <option value="Formation ADOBE ILLUSTRATOR INITIATION – 20 heures">Formation ADOBE ILLUSTRATOR INITIATION – 20 heures</option>
+                                    <option value="Formation ADOBE ILLUSTRATOR INITIATION – 15 heures">Formation ADOBE ILLUSTRATOR INITIATION – 15 heures</option>
+                                    <option value="Formation ADOBE ILLUSTRATOR INITIATION – 10 heures">Formation ADOBE ILLUSTRATOR INITIATION – 10 heures</option>
+                                    <option value="Formation AUTOCAD – 21 heures">Formation AUTOCAD – 21 heures</option>
+                                    <option value="Formation AUTOCAD – 14 heures">Formation AUTOCAD – 14 heures</option>
+                                    <option value="Formation AUTODESK REVIT – 14 heures">Formation AUTODESK REVIT – 14 heures</option>
+                                    <option value="Formation AUTOCAD – 7 heures">Formation AUTOCAD – 7 heures</option>
+                                    <option value="Formation AUTODESK REVIT – 21 heures">Formation AUTODESK REVIT – 21 heures</option>
+                                    <option value="Formation AUTODESK REVIT – 7 heures">Formation AUTODESK REVIT – 7 heures</option>
+                                    <option value="Formation PROGRAMMATION PHP/SQL – 12 heures">Formation PROGRAMMATION PHP/SQL – 12 heures</option>
+
+                                    <optgroup label="SECURITE:">
+
+                        <option value="Formation Chariot Elévateur à conducteur porté – CACES R489 – Cat 3">Formation Chariot Elévateur à conducteur porté – CACES R489 – Cat 3</option>
+                        <option value="Formation Chariot Elévateur à conducteur porté – CACES R489 – Cat 2">Formation Chariot Elévateur à conducteur porté – CACES R489 – Cat 2</option>
+                        <option value="Formation Plateformes Elévatrices – CACES R486 Cat B – Multidirectionnelle">Formation Plateformes Elévatrices – CACES R486 Cat B – Multidirectionnelle</option>
+                        <option value="Formation Engins de chantier – CACES R482 – Cat D">Formation Engins de chantier – CACES R482 – Cat D</option>
+                        <option value="Formation Engins de chantier – CACES R482 – Cat C3">Formation Engins de chantier – CACES R482 – Cat C3</option>
+                        <option value="Formation Engins de chantier – CACES R482 – Cat C2">Formation Engins de chantier – CACES R482 – Cat C2</option>
+                        <option value="Formation Échafaudage Roulant – CACES R457">Formation Échafaudage Roulant – CACES R457</option>
+                        <option value="Formation Echaffaudage Fixe – CACES R408">Formation Echaffaudage Fixe – CACES R408</option>
+                        <option value="Formation Chariot Elévateur à conducteur porté – CACES R489 – Cat 2B">Formation Chariot Elévateur à conducteur porté – CACES R489 – Cat 2B</option>
+                        <option value="Formation Engins de chantier – CACES R482 – Cat A">Formation Engins de chantier – CACES R482 – Cat A</option>
+                        <option value="Formation Chariot Elévateur à conducteur porté – CACES R489 – Cat 6">Formation Chariot Elévateur à conducteur porté – CACES R489 – Cat 6</option>
+                        <option value="Formation Chariot Elévateur à conducteur porté – CACES R489 – Cat 1B">Formation Chariot Elévateur à conducteur porté – CACES R489 – Cat 1B</option>
+                        <option value="Formation Chariot Elévateur à conducteur porté – CACES R489 – Cat 1A">Formation Chariot Elévateur à conducteur porté – CACES R489 – Cat 1A</option>
+                        <option value="Formation Engins de chantier – CACES R482 – Cat G">Formation Engins de chantier – CACES R482 – Cat G</option>
+                        <option value="Formation Engins de chantier – CACES R482 – Cat F">Formation Engins de chantier – CACES R482 – Cat F</option>
+                        <option value="Formation Engins de chantier – CACES R482 – Cat C1">Formation Engins de chantier – CACES R482 – Cat C1</option>
+                        <option value="Formation Engins de chantier – CACES R482 – Cat B">Formation Engins de chantier – CACES R482 – Cat B</option>
+                        <option value="Formation Chariot Elévateur à conducteur porté – CACES R489 – Cat 4">Formation Chariot Elévateur à conducteur porté – CACES R489 – Cat 4</option>
+                        <option value="Formation Chariot Elévateur à conducteur porté – CACES R489 – Cat 2A">Formation Chariot Elévateur à conducteur porté – CACES R489 – Cat 2A</option>
+                        <option value="Formation Chariot Elévateur à conducteur porté – CACES R489 – Cat 5">Formation Chariot Elévateur à conducteur porté – CACES R489 – Cat 5</option>
+                        <option value="Formation Grue à tour – CACES R487">Formation Grue à tour – CACES R487</option>
+                        <option value="Habilitation électrique BP – BR Photovoltaïque">Habilitation électrique BP – BR Photovoltaïque</option>
+                        <option value="Recyclage Habilitation électrique B1V, B2V, B2V Essai, BR, BC, H0V">Recyclage Habilitation électrique B1V, B2V, B2V Essai, BR, BC, H0V</option>
+                        <option value="Recyclage Habilitation électrique B0, H0, H0V, BS, BE Manoeuvre">Recyclage Habilitation électrique B0, H0, H0V, BS, BE Manoeuvre</option>
+                        <option value="Formation Plateformes Elévatrices – CACES R486 Cat A – Vertical">Formation Plateformes Elévatrices – CACES R486 Cat A – Vertical</option>
+                        <option value="Habilitation électrique B0, H0, H0V, BS, BE Manoeuvre">Habilitation électrique B0, H0, H0V, BS, BE Manoeuvre/option>
+                        <option value="Habilitation Travail en hauteur et Port du harnais">Habilitation Travail en hauteur et Port du harnais</option>
+                        <option value="Formation Sauveteur Secouriste du Travail – Maintien et Actualisation des Compétences">Formation Sauveteur Secouriste du Travail – Maintien et Actualisation des Compétences</option>
+                        <option value="Formation Sauveteur Secouriste du Travail (SST)">Formation Sauveteur Secouriste du Travail (SST)</option>
+                        <option value="Habilitation électrique B1V, B2V, B2V Essai, BR, BC, H0V">Habilitation électrique B1V, B2V, B2V Essai, BR, BC, H0V</option>
+                        <option value="Habilitation électrique B1V, B2V, B2V Essai, H0V">Habilitation électrique B1V, B2V, B2V Essai, H0V</option>
+                        <option value="Habilitation électrique B0, H0, H0V">Habilitation électrique B0, H0, H0V</option>
+                        <option value="Habilitation Manipulation des fluides frigorigènes.">Habilitation Manipulation des fluides frigorigènes.</option>
+                        <option value="Formation AIPR – Encadrant">Formation AIPR – Encadrant</option>
+                        <option value="Formation AIPR – Opérateur">Formation AIPR – Opérateur</option>
+                        <option value="Formation AIPR – Concepteur">Formation AIPR – Concepteur</option>
+                    </select>
+                    
+                    
+                    <label for="session">Date de début :</label>
+                    <input type="date" name="session">
+
+                    <label for="date_fin">Date de fin :</label>
+                    <input type="date" name="date_fin" >
+               
+                 
+                </div>
+            </div>
+            
+            <label for="mode_paiement">Mode de Paiement :</label>
+            <select id="mode_paiement" name="mode_paiement">
+                <option value="virement">Virement</option>
+                <option value="cash">Cash</option>
+                <option value="cheque">Chèque</option>
+                <option value="clf">Clf</option>
+            </select>
+            
+            <div class="montant-container">
+                <label for="montant">Montant Payé :</label>
+                <div class="input-group">
+                    <input type="number" id="montant" name="montant" step="0.01" min="0" placeholder="Montant payé">
+                    <i class="fas fa-euro-sign"></i>
+                </div>
+            </div>
+            
+            <div class="montant-container">
+                <label for="montant_restant">Montant Restant :</label>
+                <div class="input-group">
+                    <input type="number" id="montant_restant" name="montant_restant" step="0.0001" min="0" placeholder="Montant restant">
+                    <i class="fas fa-euro-sign"></i>
+                </div>
+            </div>
+            
+            <label for="commentaire">Commentaire :</label>
+            <textarea id="commentaire" name="commentaire" placeholder="Ajouter un commentaire"></textarea>
+            
+            <button type="submit"><i class="fas fa-save"></i> Enregistrer</button>
+            <div id="message" class="message" style="display: none;"></div>
+        </form>
+    </div>
+    <div id="client-info" style="display: none;">
+        <h3>Informations du Client</h3>
+        <p><strong>Nom :</strong> <span id="client-nom"></span></p>
+        <p><strong>Prénom :</strong> <span id="client-prenom"></span></p>
+        <p><strong>Téléphone :</strong> <span id="client-telephone"></span></p>
+        <p><strong>Email :</strong> <span id="client-email"></span></p>
+        <p><strong>Attestation :</strong> <a id="client-attestation" href="#" target="_blank">Télécharger l'attestation</a></p>
+        <p><strong>Formation :</strong> <span id="client-formation"></span></p>
+        <p><strong>Session :</strong> <span id="client-session"></span></p>
+        <p><strong>Mode de Paiement :</strong> <span id="client-mode-paiement"></span></p>
+        <p><strong>Montant :</strong> <span id="client-montant"></span></p>
+        <p><strong>Montant Restant :</strong> <span id="client-montant_restant"></span></p>
+        <p><strong>Commentaire :</strong> <span id="client-commentaire"></span></p>
+    </div>
+</body>
+</html>
