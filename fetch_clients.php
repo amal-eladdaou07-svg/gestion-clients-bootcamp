@@ -7,21 +7,37 @@ $conn = new mysqli("localhost", "root", "", "amal");
 
 // Vérifier la connexion
 if ($conn->connect_error) {
-    die("La connexion a échoué : " . $conn->connect_error);
+    die(json_encode(["error" => "La connexion a échoué : " . $conn->connect_error]));
 }
 
-// Filtrage par session si une session est sélectionnée
-$session_filter = "";
-if (isset($_POST['session_id']) && $_POST['session_id'] !== "") {
-    $session_id = intval($_POST['session_id']);
-    $session_filter = "INNER JOIN client_formations cf ON c.id = cf.client_id WHERE cf.session_id = $session_id";
-}
-
-// Requête SQL pour récupérer les clients
+// Initialisation de la requête SQL
 $sql = "SELECT c.id, c.nom, c.prenom, c.telephone, c.email 
-        FROM clients c 
-        $session_filter
-        ORDER BY c.nom ASC";
+        FROM clients c";
+
+// Gestion des filtres
+$conditions = [];
+
+// Filtrage par session
+if (!empty($_POST['session_id'])) {
+    $session_id = intval($_POST['session_id']);
+    $sql .= " INNER JOIN client_formations cf ON c.id = cf.client_id";
+    $conditions[] = "cf.session_id = $session_id";
+}
+
+// Filtrage par lettre
+if (!empty($_POST['letter'])) {
+    $letter = $conn->real_escape_string($_POST['letter']);
+    $conditions[] = "c.nom LIKE '$letter%'";
+}
+
+// Ajout des conditions à la requête
+if (!empty($conditions)) {
+    $sql .= " WHERE " . implode(" AND ", $conditions);
+}
+
+// Tri par ordre alphabétique
+$sql .= " ORDER BY c.nom ASC";
+
 $result = $conn->query($sql);
 
 $clients = [];

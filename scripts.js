@@ -247,7 +247,7 @@ function listerClients() {
 }
 
 function retourAccueil() {
-    window.location.href = 'index.php';
+    window.location.href = 'index.html';
     toggleVisibility('formulaire-ajout', 'none');
     toggleVisibility('formulaire-modification', 'none');
     toggleVisibility('client-info', 'none');

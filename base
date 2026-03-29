@@ -1,0 +1,45 @@
+voici la base de donnes:j'ai creer la base de donne :mes_clients suivant:USE mes_clients;
+
+CREATE TABLE clients (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    prenom VARCHAR(100) NOT NULL,
+    telephone VARCHAR(15),
+    email VARCHAR(100),
+    attestation BLOB,
+   
+    mode_paiement VARCHAR(50),
+    montant DECIMAL(10,2),
+    commentaires TEXT
+);
+
+-- Table des formations
+CREATE TABLE formations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(255) NOT NULL
+);
+
+-- Table des sessions
+CREATE TABLE sessions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    formation_id INT,
+    date_fin DATE,
+    FOREIGN KEY (formation_id) REFERENCES formations(id)
+);
+
+-- Table des clients_formations
+CREATE TABLE client_formations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    client_id INT,
+    session_id INT,
+    FOREIGN KEY (client_id) REFERENCES clients(id),
+    FOREIGN KEY (session_id) REFERENCES sessions(id)
+);
+
+-- Table des attestations 
+CREATE TABLE attestations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    client_id INT,
+    fichier VARCHAR(255),  -- Chemin du fichier d'attestation
+    FOREIGN KEY (client_id) REFERENCES clients(id)
+);.
