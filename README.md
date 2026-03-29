@@ -1,4 +1,6 @@
 # Application Web de Gestion des Clients
+<img width="1857" height="931" alt="image" src="https://github.com/user-attachments/assets/375c8a12-c7e4-4b1e-b2db-154a261ced7c" />
+
 
 ## Description
 Cette application web permet de gérer les clients dans une entreprise.  
