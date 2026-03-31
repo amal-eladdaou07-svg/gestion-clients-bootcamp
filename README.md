@@ -24,7 +24,7 @@ Elle a été développée dans le cadre d’une formation Bootcamp.
 ## Installation
 
 1. Cloner le projet :
-git clone https://github.com/amal-eladdaou07-svg/gestion-clients-bootcamp.git
+git clone https://github.com/amal-eladdaou07-svg/gestion-clients-bootcamp/master.git
 
 2. Copier le dossier dans :
 C:\xampp\htdocs
